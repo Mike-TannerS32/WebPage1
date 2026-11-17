@@ -11,15 +11,34 @@ public class Customer {
         this.email = email;
     }
 
-    public String getId(){
-        return String.valueOf(id);
+    public int getId(){
+        return this.id;
     }
 
     public String getName(){
-        return name;
+        return this.name;
     }
 
     public String getEmail(){
+        return this.email;
+    }
+
+    public int setId(int id){
+        this.id = id;
+        return id;
+    }
+
+    public String setName(String name){
+        this.name = name;
+        return name;
+    }
+
+    public String setEmail(String email){
+        this.email = email;
         return email;
+    }
+
+    public String toString(){
+        return "Customer(id=" + id + ", name=" + name + ", email=" + email + ")";
     }
 }

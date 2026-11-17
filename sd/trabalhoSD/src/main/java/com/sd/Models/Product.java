@@ -24,38 +24,87 @@ public class Product{
     }
 
     public int getId(){
-        return id;
+        return this.id;
     }
 
     public String getName(){
-        return name;
+        return this.name;
     }
 
     public String getCategory(){
-        return category;
+        return this.category;
     }
 
     public String getDescription(){
-        return description;
+        return this.description;
     }
 
     public String getPhoto(){
-        return photo;
+        return this.photo;
     }
 
     public int getPrice(){
-        return price;
+        return this.price;
     }
 
     public int getStock(){
-        return stock;
+        return this.stock;
     }
 
     public String getStatus(){
-        return status;
+        return this.status;
     }
 
     public Timestamp getCreatedAt(){
+        return this.createdAt;
+    }
+
+    public int setId(int id){
+        this.id = id;
+        return id;
+    }
+
+    public String setName(String name){
+        this.name = name;
+        return name;
+    }
+
+    public String setCategory(String category){
+        this.category = category;
+        return category;
+    }
+
+    public String setDescription(String description){
+        this.description = description;
+        return description;
+    }
+
+    public String setPhoto(String photo){
+        this.photo = photo;
+        return photo;
+    }
+
+    public int setPrice(int price){
+        this.price = price;
+        return price;
+    }
+
+    public int setStock(int stock){
+        this.stock = stock;
+        return stock;
+    }
+
+    public String setStatus(String status){
+        this.status = status;
+        return status;
+    }
+
+    public Timestamp setCreatedAt(Timestamp createdAt){
+        this.createdAt = createdAt;
         return createdAt;
-    }   
+    }
+
+    public String toString(){
+        return "Product(id=" + id + ", name=" + name + ", category=" + category + ", description=" + description + ", photo=" + photo + ", price=" + price + ", stock=" + stock + ", status=" + status + ", createdAt=" + createdAt + ")";
+    }
 }

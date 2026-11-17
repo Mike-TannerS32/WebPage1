@@ -31,7 +31,7 @@ CREATE TABLE orders IF NOT EXISTS (
     customer_id INTEGER NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
     total_cents INTEGER NOT NULL CHECK (total_cents >= 0),
     status TEXT NOT NULL DEFAULT 'PENDING',
-    created_at TIMESTAMP NOT NULL DEFAULT now()
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE order_items IF NOT EXISTS (
@@ -40,4 +40,5 @@ CREATE TABLE order_items IF NOT EXISTS (
     quantity INTEGER NOT NULL,
     unit_price_cents INTEGER NOT NULL,
     PRIMARY KEY (order_id, product_id)
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
