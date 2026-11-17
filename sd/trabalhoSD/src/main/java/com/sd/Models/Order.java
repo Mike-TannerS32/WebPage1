@@ -2,16 +2,17 @@ package com.sd.Models;
 
 public class Order{
     private int id;
-    privat int customerId;
+    private int customerId;
     private int totalPrice;
     private String status;
     private Timestamp createdAt;
 
-    public Order(int id, int customerId, int totalPrice, String status) {
+    public Order(int id, int customerId, int totalPrice, String status, Timestamp createdAt) {
         this.id = id;
         this.customerId = customerId;
         this.totalPrice = totalPrice;
         this.status = status;
+        this.createdAt = createdAt;
     }
 
     public int getId() {

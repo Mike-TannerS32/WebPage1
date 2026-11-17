@@ -1,5 +1,12 @@
 package java.com.sd.Clients;
 
+import java.text.ParseException;
+import java.util.Scanner;
+
+import org.springframework.web.reactive.function.client.WebClient;
+import com.sd.Models.CartItem;
+import com.sd.Models.Order;
+import com.sd.Models.Product;
 
 public ClienteGeral {
 
@@ -16,5 +23,9 @@ public ClienteGeral {
         System.out.println("0 - Sair");
         System.out.println();
         System.out.print("Escolha uma opção: ");
+    }
+
+    public static void main(String[] args) throws ParseException {
+        menu();
     }
 }
