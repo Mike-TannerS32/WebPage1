@@ -1,5 +1,8 @@
 package com.sd.Models;
 
+import java.sql.Timestamp;
+
+
 public class Customer {
     private int id;
     private String name;

@@ -8,7 +8,7 @@ import com.sd.Models.CartItem;
 import com.sd.Models.Order;
 import com.sd.Models.Product;
 
-public ClienteGeral {
+public class ClientGeral {
 
     public static void menu(){
         System.out.println("------ Loja Produtos Cliente ---");

@@ -1,5 +1,7 @@
 package com.sd.Models;
 
+import java.sql.Timestamp;
+
 public class CartItem {
     private int id;
     private int customerId;
@@ -8,10 +10,11 @@ public class CartItem {
     private int quantity;
     private Timestamp createdAt;
 
-    public CartItem(int id, int customerId, int productid, Product product, int quantity) {
+    public CartItem(int id, int customerId, int productid, Product product, int quantity, Timestamp createdAt) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
+        this.createdAt = createdAt;
     }
 
     public int getId(){

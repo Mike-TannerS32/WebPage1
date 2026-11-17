@@ -1,12 +1,14 @@
 package com.sd.Models;
 
+import java.sql.Timestamp;
+
+
 public class OrderItem{
     private int orderId;
     private int productId;
     private Product product;
     private int quantity;
     private int unitPricecents;
-    private Timestamp createdAt;
 
     public OrderItem(int orderId, int productId, Product product, int quantity, int unitPricecents) {
         this.orderId = orderId;
@@ -36,9 +38,6 @@ public class OrderItem{
         return this.unitPricecents;
     }
 
-    public Timestamp getCreatedAt() {
-        return this.createdAt;
-    }
 
     public int setOrderId(int orderId) {
         return this.orderId = orderId;
@@ -60,10 +59,6 @@ public class OrderItem{
         return this.unitPricecents = unitPricecents;
     }
 
-    public Timestamp setCreatedAt(Timestamp createdAt) {
-        return this.createdAt = createdAt;
-    }
-
     public String toString() {
         return "OrderItem{" +
                 "orderId=" + orderId +
@@ -71,7 +66,6 @@ public class OrderItem{
                 ", product=" + product +
                 ", quantity=" + quantity +
                 ", unitPricecents=" + unitPricecents +
-                ", createdAt=" + createdAt +
                 '}';
     }
 }

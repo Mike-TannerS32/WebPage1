@@ -1,18 +1,17 @@
 package com.sd.Models;
 
+
 public class Order{
     private int id;
     private int customerId;
     private int totalPrice;
     private String status;
-    private Timestamp createdAt;
 
-    public Order(int id, int customerId, int totalPrice, String status, Timestamp createdAt) {
+    public Order(int id, int customerId, int totalPrice, String status) {
         this.id = id;
         this.customerId = customerId;
         this.totalPrice = totalPrice;
         this.status = status;
-        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -31,10 +30,6 @@ public class Order{
         return this.status;
     }
 
-    public Timestamp getCreatedAt(){
-        return this.createdAt;
-    }
-
     public int setId(int id){
         return this.id = id;
     }
@@ -51,17 +46,12 @@ public class Order{
         return this.status = status;
     }
 
-    public Timestamp setCreatedAt(Timestamp createdAt){
-        return this.createdAt = createdAt;
-    }
-
     public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", customerId=" + customerId +
                 ", totalPrice=" + totalPrice +
                 ", status='" + status + '\'' +
-                ", createdAt=" + createdAt +
                 '}';
     }
 }

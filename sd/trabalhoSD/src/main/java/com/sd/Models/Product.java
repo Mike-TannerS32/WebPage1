@@ -1,5 +1,6 @@
 package com.sd.Models;
 
+
 public class Product{
     private int id;
     private String name;
@@ -9,9 +10,8 @@ public class Product{
     private int price;
     private int stock;
     private String status;
-    private Timestamp createdAt;
 
-    public Product(int id, String name, String category, String description, String photo, int price, int stock, String status, Timestamp createdAt) {
+    public Product(int id, String name, String category, String description, String photo, int price, int stock, String status) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -20,7 +20,6 @@ public class Product{
         this.price = price;
         this.stock = stock;
         this.status = status;
-        this.createdAt = createdAt;
     }
 
     public int getId(){
@@ -53,10 +52,6 @@ public class Product{
 
     public String getStatus(){
         return this.status;
-    }
-
-    public Timestamp getCreatedAt(){
-        return this.createdAt;
     }
 
     public int setId(int id){
@@ -99,12 +94,7 @@ public class Product{
         return status;
     }
 
-    public Timestamp setCreatedAt(Timestamp createdAt){
-        this.createdAt = createdAt;
-        return createdAt;
-    }
-
     public String toString(){
-        return "Product(id=" + id + ", name=" + name + ", category=" + category + ", description=" + description + ", photo=" + photo + ", price=" + price + ", stock=" + stock + ", status=" + status + ", createdAt=" + createdAt + ")";
+        return "Product(id=" + id + ", name=" + name + ", category=" + category + ", description=" + description + ", photo=" + photo + ", price=" + price + ", stock=" + stock + ", status=" + status + ")";
     }
 }
