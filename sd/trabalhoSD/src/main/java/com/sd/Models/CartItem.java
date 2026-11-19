@@ -10,6 +10,8 @@ public class CartItem {
     private int quantity;
     private Timestamp createdAt;
 
+    public CartItem() {}
+
     public CartItem(int id, int customerId, int productid, Product product, int quantity, Timestamp createdAt) {
         this.id = id;
         this.product = product;

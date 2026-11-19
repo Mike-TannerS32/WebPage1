@@ -10,6 +10,8 @@ public class OrderItem{
     private int quantity;
     private int unitPricecents;
 
+    public OrderItem() {}
+
     public OrderItem(int orderId, int productId, Product product, int quantity, int unitPricecents) {
         this.orderId = orderId;
         this.productId = productId;

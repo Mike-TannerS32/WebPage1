@@ -9,6 +9,8 @@ public class Order{
     private String status;
     private Timestamp createdAt;
 
+    public Order() {}
+
     public Order(int id, int customerId, int totalPrice, String status, Timestamp createdAt) {
         this.id = id;
         this.customerId = customerId;
