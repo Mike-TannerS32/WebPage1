@@ -26,105 +26,115 @@ public class ShopConnector {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    // Mapeadores
+
+    private final RowMapper<Product> productMapper = (rs, i) -> {
+        Product p = new Product();
+        p.setId(rs.getInt("id"));
+        p.setName(rs.getString("name"));
+        p.setCategory(rs.getString("category"));
+        p.setDescription(rs.getString("description"));
+        p.setPhoto(rs.getString("photo"));
+        p.setPrice(rs.getInt("price_cents"));
+        p.setStock(rs.getInt("stock"));
+        p.setStatus(rs.getString("status"));
+        return p;
+    }
+
+    private final RowMapper<CartItem> cartItemMapper = (rs, i) -> {
+        CartItem c = new CartItem();
+        c.setCustomerId(rs.getInt("customer_id"));
+        c.setProductId(rs.getInt("product_id"));
+        c.setQuantity(rs.getInt("quantity"));
+        return c;
+    }
+
+    private final RowMapper<Order> orderMapper = (rs, i) -> {
+        Order o = new Order();
+        o.setId(rs.getInt("id"));
+        o.setCustomerId(rs.getInt("customer_id"));
+        o.setTotalPrice(rs.getInt("total_cents"));
+        o.setStatus(rs.getString("status"));
+        return o;
+    }
+
+    private final RowMapper<OrderItem> orderItemMapper = (rs, i) -> {
+        OrderItem oi = new OrderItem();
+        oi.setOrderId(rs.getInt("order_Id"));
+        oi.setProductId(rs.getInt("product_Id"));
+        oi.setTotalPrice(rs.getInt("total_cents"));
+        oi.setStatus(rs.getString("status"));
+        return oi;
+    }
+
     //cliente
     // criar conta do cliente
-    public Boolean createCustomer(Customer customer){
-        String str = "INSERT INTO customers (name, email) VALUES (?, ?)";
-
-        System.out.println(customer.toString());
-        jdbcTemplate.update(str, customer.getName(), customer.getEmail());
-
-        return true;
+    public int createCustomer(Customer c){
+        return jdbcTemplate.queryForObject(
+            "INSERT INTO customers (name, email) VALUES (?, ?)",
+            Integer.class,  c.getName(), c.getEmail());
     }
 
 
     //admin
     //criar um produto
-    public Boolean createProduct(Product product){
-        String str = "INSERT INTO products (name,category,description, photo,price_cents, stock, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        System.out.println(product.toString());
-        jdbcTemplate.update(str, product.getName(), product.getCategory(), product.getdescription(), product.getPhoto(),product.getPrice(),product.getStock(), product.getStatus());
+    public int createProduct(Product p){
+        return jdbcTemplate.queryForObject(
+            "INSERT INTO products (name,category,description, photo,price_cents, stock, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            Integer.class, p.getName(), p.getCategory(), p.getDescription(),
+            p.getPhoto(),p.getPrice(),p.getStock(), p.getStatus()
+        );
+    }
 
-        return true;
+    public boolean updateProduct(int id, Product p){
+        return jdbcTemplate.update("UPDATE products SET name=?, category=?, description=?, photo=?, price_cents=?, stock=?, status=?",
+        p.getName(), p.getCategory(), p.getDescription(), p.getPhoto(), p.getPrice(), p.getStock(), id) > 0;
+    }
+
+    public boolean setProductStatus(int id, String status){
+        return jdbcTemplate.update("UPDATE products SET status=? WHERE i=?",status, id);
     }
 
     //listar todos os produtos
     public List<Product> getProducts(){
         String str = "SELECT * FROM products";
-        return jdbcTemplate.query(str, new RowMapper<Product>() {
-            public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Product product = new Product();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setPrice(rs.getInt("price_cents"));
-                return product;
-            }
-        });
+        return jdbcTemplate.query(str, productMapper);
     }
 
     public List<Product> getProductsByStatus(String status){
         String str = "SELECT * FROM products WHERE status = ?";
-        return jdbcTemplate.query(str, new RowMapper<Product>() {
-            public Product mapRow(ResultSet rs, int rowNum) throws SQLException{
-                Product product = new Product(rs.getInt("id"), rs.getString("name"), rs.getInt("price_cents"));
-                System.out.println(product);
-                return product;
-            }
-        }, status);
+        return jdbcTemplate.query(str, productMapper, status);
     }
 
     //devolve um produto por id
     public Product getProductById(int id){
-        String str = "SELECT * FROM products WHERE ID = ?";
-        return jdbcTemplate.queryForObject(str, new Object[]{id}, new RowMapper<Product>() {
-            public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Product product = new Product();
-                product.setId(rs.getInt("id"));
-                product.setName(rs.getString("name"));
-                product.setPrice(rs.getDouble("price"));
-                return product;
-            }
-        });
+        String str = "SELECT * FROM products WHERE Id = ?";
+        return jdbcTemplate.queryForObject(str, productMapper, id);
     }
 
     //criar um item no carrinho
     public Boolean createCartItem(CartItem cartItem){
         String str = "INSERT INTO cart_items (product_id, customer_id, quantity) Values (?, ?)";
-        jdbcTemplate.update(str, cartItem.getProductId(), cartItem.getCustomerId,cartItem.getQuantity());
+        jdbcTemplate.update(str, cartItem.getProductId(), cartItem.getCustomerId(), cartItem.getQuantity());
         return true;
     }
 
     // listar todos os itens do carrinho
-    public List<CartItem> getCartItems(){
-        String str = "SELECT * FROM cart_items WHERE customerId = ?";
-        return jdbcTemplate.query(str, new RowMapper<CartItem>(){
-            public CartItem mapRow(ResultSet rs, int rowNum) throws SQLException{
-                CartItem cartItem = new CartItem();
-                cartItem.setId(rs.getInt("id"));
-                cartItem.setProductId(rs.getInt("product_id"));
-                cartItem.setCustomerId(rs.getInt("customer_id"));
-                cartItem.setQuantity(rs.getInt("quantity"));
-                return cartItem;
-            }
-        });
+    public List<CartItem> getCartItemsByCustomerId(){
+        return jdbcTemplate.query("SELECT * FROM cart_items WHERE customer_id = ?", cartItemMapper);
     }
 
     // retira um item do carrinho
-    public Boolean removeCartItem(int id){
+    public Boolean removeCartItem(int customer_id, int product_Id){
         String str = "DELETE FROM cart_items WHERE customer_id = ? AND product_id = ?";
-        jdbcTemplate.update(str, id);
+        jdbcTemplate.update(str, customer_id, product_id);
         return true;
     }
 
     //cria uma encomenda
-    public Boolean createOrder(Order order){
-        String str = "INSERT INTO orders (customer_id, total_cents) VALUES (?, ?) RETURNING id";
-
-        System.out.println(order.toString());
-        jdbcTemplate.update(str, order.getCustomerId(), order.getTotalPrice());
-
-        return true;
+    public Boolean createOrder(int customer_id, int total_cents){
+        return jdbcTemplate.queryForObject("INSERT INTO orders (customer_id, total_cents) VALUES(?, ?) RETURNING id",
+         Integer.class,customer_id, total_cents);
     }
 
     // cria um item de encomenda
@@ -149,13 +159,6 @@ public class ShopConnector {
                 return orderItem;
             }
         });
-    }
-
-    // retira um item da encomenda
-    public Boolean removeOrderItem(int id){
-        String str = "DELETE FROM order_items WHERE id = ?";
-        jdbcTemplate.update(str, id);
-        return true;
     }
 
     //lista todas as encomendas
