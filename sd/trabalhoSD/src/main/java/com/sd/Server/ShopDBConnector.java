@@ -18,11 +18,11 @@ import com.sd.Models.CartItem;
 import com.sd.Models.OrderItem;
 
 @Component
-public class ShopConnector {
+public class ShopDBConnector {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public ShopConnector(JdbcTemplate jdbcTemplate){
+    public ShopDBConnector(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 
