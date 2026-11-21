@@ -96,26 +96,22 @@ public class ShopConnector {
 
     //listar todos os produtos
     public List<Product> getProducts() throws SQLException{
-        String str = "SELECT * FROM products";
-        return jdbcTemplate.query(str, productMapper);
+        return jdbcTemplate.query("SELECT * FROM products", productMapper);
     }
 
     public List<Product> getProductsByStatus(String status) throws SQLException{
-        String str = "SELECT * FROM products WHERE status = ?";
-        return jdbcTemplate.query(str, productMapper, status);
+        return jdbcTemplate.query("SELECT * FROM products WHERE status = ?", productMapper, status);
     }
 
     //devolve um produto por id
     public Product getProductById(int id) throws SQLException{
-        String str = "SELECT * FROM products WHERE Id = ?";
-        return jdbcTemplate.queryForObject(str, productMapper, id);
+        return jdbcTemplate.queryForObject("SELECT * FROM products WHERE Id = ?", productMapper, id);
     }
 
     //criar um item no carrinho
-    public Boolean createCartItem(CartItem cartItem) throws SQLException{
-        String str = "INSERT INTO cart_items (product_id, customer_id, quantity) Values (?, ?)";
-        jdbcTemplate.update(str, cartItem.getProductId(), cartItem.getCustomerId(), cartItem.getQuantity());
-        return true;
+    public Boolean addToCart(int customer_id, int product_id, int quantity) throws SQLException{
+        return jdbcTemplate.update("INSERT INTO cart_items (product_id, customer_id, quantity) Values (?, ?)",
+                             product_id, customer_id, quantity) > 0;
     }
 
     // listar todos os itens do carrinho
@@ -125,7 +121,8 @@ public class ShopConnector {
 
     // retira um item do carrinho
     public Boolean removeCartItem(int customer_id, int product_Id) throws SQLException{
-        return jdbcTemplate.update("DELETE FROM cart_items WHERE customer_id = ? AND product_id = ?", customer_id, product_Id) > 0;
+        return jdbcTemplate.update("DELETE FROM cart_items WHERE customer_id = ? AND product_id = ?", 
+                                    customer_id, product_Id) > 0;
     }
 
     public void clearCart(int customer_id){
@@ -139,25 +136,20 @@ public class ShopConnector {
     }
 
     // cria um item de encomenda
-    public Boolean createOrderItem(OrderItem orderItem) throws SQLException{
-        String str = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (?, ?, ?)";
-
-        System.out.println(orderItem.toString());
-        jdbcTemplate.update(str, orderItem.getOrderId(), orderItem.getProductId(), orderItem.getQuantity());
-
-        return true;
+    public Boolean createOrderItem(OrderItem oi) throws SQLException{
+        System.out.println(oi.toString());
+        return jdbcTemplate.update("INSERT INTO order_items (order_id, product_id, quantity) VALUES (?, ?, ?)", 
+            oi.getOrderId(), oi.getProductId(), oi.getQuantity()) > 0;
     }
 
     // lista todos os itens da encomenda
     public List<OrderItem> getOrderItems() throws SQLException{
-        String str = "SELECT * FROM order_items";
-        return jdbcTemplate.query(str, orderItemMapper);
+        return jdbcTemplate.query("SELECT * FROM order_items", orderItemMapper);
     }
 
     //lista todas as encomendas
     public List<Order> getOrders() throws SQLException{
-        String str = "SELECT * FROM orders";
-        return jdbcTemplate.query(str, orderMapper);
+        return jdbcTemplate.query("SELECT * FROM orders", orderMapper);
     }
 
     public List<Order> getOrdersByCustomer(int customer_id){
