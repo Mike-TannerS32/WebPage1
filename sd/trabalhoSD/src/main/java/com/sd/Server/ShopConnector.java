@@ -119,15 +119,17 @@ public class ShopConnector {
     }
 
     // listar todos os itens do carrinho
-    public List<CartItem> getCartItemsByCustomerId() throws SQLException{
-        return jdbcTemplate.query("SELECT * FROM cart_items WHERE customer_id = ?", cartItemMapper);
+    public List<CartItem> getCartItems(int customer_id) throws SQLException{
+        return jdbcTemplate.query("SELECT * FROM cart_items WHERE customer_id = ?", cartItemMapper, customer_id);
     }
 
     // retira um item do carrinho
     public Boolean removeCartItem(int customer_id, int product_Id) throws SQLException{
-        String str = "DELETE FROM cart_items WHERE customer_id = ? AND product_id = ?";
-        jdbcTemplate.update(str, customer_id, product_Id);
-        return true;
+        return jdbcTemplate.update("DELETE FROM cart_items WHERE customer_id = ? AND product_id = ?", customer_id, product_Id) > 0;
+    }
+
+    public void clearCart(int customer_id){
+        jdbcTemplate.update("DELETE FROM cart_items WHERE customer_id = ?", customer_id);
     }
 
     //cria uma encomenda
@@ -156,5 +158,18 @@ public class ShopConnector {
     public List<Order> getOrders() throws SQLException{
         String str = "SELECT * FROM orders";
         return jdbcTemplate.query(str, orderMapper);
+    }
+
+    public List<Order> getOrdersByCustomer(int customer_id){
+        return jdbcTemplate.query("SELECT * FROM orders WHERE customer_id = ?", orderMapper, customer_id);
+    }
+
+    // lista as encomendas que têm determinado estado
+    public List<Order> getOrderByStatus(String status){
+        return jdbcTemplate.query("SELECT * FROM orders WHERE status=?", orderMapper, status);
+    }
+
+    public boolean setOrderStatus(int id, String status){
+        return jdbcTemplate.update("UPDATE orders SET status = ? WHERE id = ?", status, id) > 0;
     }
 }
