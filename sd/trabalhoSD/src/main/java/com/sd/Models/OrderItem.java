@@ -1,8 +1,5 @@
 package com.sd.Models;
 
-import java.sql.Timestamp;
-
-
 public class OrderItem{
     private Integer orderId;
     private Integer productId;
