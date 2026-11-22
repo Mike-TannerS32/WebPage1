@@ -26,6 +26,14 @@ public class ShopDbConnector {
 
     // Mapeadores
 
+    private final RowMapper<Customer> customerMapper = (rs, i) -> {
+        Customer c = new Customer();
+        c.setId(rs.getInt("id"));
+        c.setName(rs.getString("name"));
+        c.setEmail(rs.getString("email"));
+        return c;
+    };
+
     private final RowMapper<Product> productMapper = (rs, i) -> {
         Product p = new Product();
         p.setId(rs.getInt("id"));
@@ -70,6 +78,10 @@ public class ShopDbConnector {
         return jdbcTemplate.queryForObject(
             "INSERT INTO customers (name, email) VALUES (?, ?) RETURNING id",
             Integer.class,  c.getName(), c.getEmail());
+    }
+
+    public Customer getCustomerById(Integer id) throws SQLException{
+        return jdbcTemplate.queryForObject("SELECT * FROM customers WHERE id = ?", customerMapper, id);
     }
 
 

@@ -4,15 +4,15 @@ import java.sql.Timestamp;
 
 
 public class OrderItem{
-    private int orderId;
-    private int productId;
+    private Integer orderId;
+    private Integer productId;
     private Product product;
     private int quantity;
     private int unitPricecents;
 
     public OrderItem() {}
 
-    public OrderItem(int orderId, int productId, Product product, int quantity, int unitPricecents) {
+    public OrderItem(Integer orderId, Integer productId, Product product, int quantity, int unitPricecents) {
         this.orderId = orderId;
         this.productId = productId;
         this.product = product;
@@ -20,11 +20,11 @@ public class OrderItem{
         this.unitPricecents = unitPricecents;
     }
 
-    public int getOrderId() {
+    public Integer getOrderId() {
         return this.orderId;
     }
 
-    public int getProductId() {
+    public Integer getProductId() {
         return this.productId;
     }
 
@@ -41,11 +41,11 @@ public class OrderItem{
     }
 
 
-    public int setOrderId(int orderId) {
+    public Integer setOrderId(Integer orderId) {
         return this.orderId = orderId;
     }
 
-    public int setProductId(int productId) {
+    public Integer setProductId(Integer productId) {
         return this.productId = productId;
     }
 

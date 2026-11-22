@@ -3,15 +3,15 @@ package com.sd.Models;
 import java.sql.Timestamp;
 
 public class Order{
-    private int id;
-    private int customerId;
+    private Integer id;
+    private Integer customerId;
     private int totalPrice;
     private String status;
     private Timestamp createdAt;
 
     public Order() {}
 
-    public Order(int id, int customerId, int totalPrice, String status, Timestamp createdAt) {
+    public Order(Integer id, Integer customerId, int totalPrice, String status, Timestamp createdAt) {
         this.id = id;
         this.customerId = customerId;
         this.totalPrice = totalPrice;
@@ -19,11 +19,11 @@ public class Order{
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public int getCustomerId(){
+    public Integer getCustomerId(){
         return this.customerId;
     }
 
@@ -39,11 +39,11 @@ public class Order{
         return this.createdAt;
     }
 
-    public int setId(int id){
+    public Integer setId(Integer id){
         return this.id = id;
     }
 
-    public int setCustomerId(int customerId){
+    public Integer setCustomerId(Integer customerId){
         return this.customerId = customerId;
     }
 

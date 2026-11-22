@@ -3,31 +3,31 @@ package com.sd.Models;
 import java.sql.Timestamp;
 
 public class CartItem {
-    private int id;
-    private int customerId;
-    private int productid;
+    private Integer id;
+    private Integer customerId;
+    private Integer productid;
     private Product product;
     private int quantity;
     private Timestamp createdAt;
 
     public CartItem() {}
 
-    public CartItem(int id, int customerId, int productid, Product product, int quantity, Timestamp createdAt) {
+    public CartItem(Integer id, Integer customerId, Integer productid, Product product, int quantity, Timestamp createdAt) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.createdAt = createdAt;
     }
 
-    public int getId(){
+    public Integer getId(){
         return this.id;
     }
 
-    public int getCustomerId(){
+    public Integer getCustomerId(){
         return this.customerId;
     }
 
-    public int getProductId(){
+    public Integer getProductId(){
         return this.productid;
     }
 
@@ -43,15 +43,15 @@ public class CartItem {
         return createdAt;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
-    public void setProductId(int productid) {
+    public void setProductId(Integer productid) {
         this.productid = productid;
     }
 
