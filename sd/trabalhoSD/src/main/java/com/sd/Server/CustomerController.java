@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sd.Models.Customer;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 public class CustomerController {
     
     private final ShopDbConnector shopDbConnector;

@@ -1,12 +1,6 @@
-package java.com.sd.Clients;
+package com.sd.Clients;
 
 import java.text.ParseException;
-import java.util.Scanner;
-
-import org.springframework.web.reactive.function.client.WebClient;
-import com.sd.Models.CartItem;
-import com.sd.Models.Order;
-import com.sd.Models.Product;
 
 public class ClientGeral {
 

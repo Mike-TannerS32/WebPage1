@@ -1,4 +1,4 @@
-INSERT INTO products (id, name, price) VALUES (1, 'Shampoo', 10.99);
-INSERT INTO products (id, name, price) VALUES (2, 'Conditioner', 12.99);
-INSERT INTO products (id, name, price) VALUES (3, 'Hair Gel', 8.99);
-INSERT INTO products (id, name, price) VALUES (4, 'Hair Spray', 9.99);
+INSERT INTO products (name, category, price_cents) VALUES ('Shampoo', 'cleaning', 1099) ON CONFLICT DO NOTHING;
+INSERT INTO products (name, category, price_cents) VALUES ('Conditioner', 'cleaning',1299) ON CONFLICT DO NOTHING;
+INSERT INTO products (name, category, price_cents) VALUES ('Hair Gel','cleaning' ,899) ON CONFLICT DO NOTHING;
+INSERT INTO products (name, category, price_cents) VALUES ('Hair Spray', 'cleaning',999) ON CONFLICT DO NOTHING;

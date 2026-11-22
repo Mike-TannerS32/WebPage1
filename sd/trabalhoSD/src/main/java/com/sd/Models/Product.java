@@ -2,29 +2,29 @@ package com.sd.Models;
 
 
 public class Product{
-    private int id;
+    private Integer id;
     private String name;
     private String category;
     private String description;
     private String photo;
-    private int price;
-    private int stock;
+    private Integer price_cents;
+    private Integer stock;
     private String status;
 
     public Product() {}
 
-    public Product(int id, String name, String category, String description, String photo, int price, int stock, String status) {
+    public Product(int id, String name, String category, String description, String photo, int price_cents, int stock, String status) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.description = description;
         this.photo = photo;
-        this.price = price;
+        this.price_cents = price_cents;
         this.stock = stock;
         this.status = status;
     }
 
-    public int getId(){
+    public Integer getId(){
         return this.id;
     }
 
@@ -44,11 +44,11 @@ public class Product{
         return this.photo;
     }
 
-    public int getPrice(){
-        return this.price;
+    public Integer getPrice(){
+        return this.price_cents;
     }
 
-    public int getStock(){
+    public Integer getStock(){
         return this.stock;
     }
 
@@ -56,9 +56,8 @@ public class Product{
         return this.status;
     }
 
-    public int setId(int id){
+    public void setId(int id){
         this.id = id;
-        return id;
     }
 
     public String setName(String name){
@@ -81,14 +80,12 @@ public class Product{
         return photo;
     }
 
-    public int setPrice(int price){
-        this.price = price;
-        return price;
+    public void setPrice(int price_cents){
+        this.price_cents = price_cents;
     }
 
-    public int setStock(int stock){
+    public void setStock(int stock){
         this.stock = stock;
-        return stock;
     }
 
     public String setStatus(String status){
@@ -97,6 +94,6 @@ public class Product{
     }
 
     public String toString(){
-        return "Product(id=" + id + ", name=" + name + ", category=" + category + ", description=" + description + ", photo=" + photo + ", price=" + price + ", stock=" + stock + ", status=" + status + ")";
+        return "Product(id=" + id + ", name=" + name + ", category=" + category + ", description=" + description + ", photo=" + photo + ", price_cents=" + price_cents + ", stock=" + stock + ", status=" + status + ")";
     }
 }

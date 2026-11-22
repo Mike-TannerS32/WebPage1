@@ -68,7 +68,7 @@ public class ShopDbConnector {
     // criar conta do cliente
     public int createCustomer(Customer c) throws SQLException{
         return jdbcTemplate.queryForObject(
-            "INSERT INTO customers (name, email) VALUES (?, ?)",
+            "INSERT INTO customers (name, email) VALUES (?, ?) RETURNING id",
             Integer.class,  c.getName(), c.getEmail());
     }
 
@@ -77,7 +77,7 @@ public class ShopDbConnector {
     //criar um produto
     public int createProduct(Product p) throws SQLException{
         return jdbcTemplate.queryForObject(
-            "INSERT INTO products (name,category,description, photo,price_cents, stock, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO products (name,category,description, photo, price_cents, stock, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             Integer.class, p.getName(), p.getCategory(), p.getDescription(),
             p.getPhoto(),p.getPrice(),p.getStock(), p.getStatus()
         );

@@ -1,22 +1,19 @@
 package com.sd.Models;
 
-import java.sql.Timestamp;
-
-
 public class Customer {
-    private int id;
+    private Integer id;
     private String name;
     private String email;
 
     public Customer() {}
 
-    public Customer(int id, String name, String email){
+    public Customer(Integer id, String name, String email){
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public int getId(){
+    public Integer getId(){
         return this.id;
     }
 
@@ -28,9 +25,8 @@ public class Customer {
         return this.email;
     }
 
-    public int setId(int id){
+    public void setId(Integer id){
         this.id = id;
-        return id;
     }
 
     public String setName(String name){
