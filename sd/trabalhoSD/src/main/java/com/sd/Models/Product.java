@@ -7,13 +7,13 @@ public class Product{
     private String category;
     private String description;
     private String photo;
-    private int price_cents;
-    private int stock;
+    private Integer price_cents;
+    private Integer stock;
     private String status;
 
     public Product() {}
 
-    public Product(Integer id, String name, String category, String description, String photo, int price_cents, int stock, String status) {
+    public Product(Integer id, String name, String category, String description, String photo, Integer price_cents, Integer stock, String status) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -44,11 +44,11 @@ public class Product{
         return this.photo;
     }
 
-    public int getPrice(){
+    public Integer getPrice_cents(){
         return this.price_cents;
     }
 
-    public int getStock(){
+    public Integer getStock(){
         return this.stock;
     }
 
@@ -80,11 +80,11 @@ public class Product{
         return photo;
     }
 
-    public void setPrice(int price_cents){
+    public void setPrice(Integer price_cents){
         this.price_cents = price_cents;
     }
 
-    public void setStock(int stock){
+    public void setStock(Integer stock){
         this.stock = stock;
     }
 

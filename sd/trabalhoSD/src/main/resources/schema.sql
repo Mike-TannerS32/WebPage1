@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS products (
     description TEXT,
     photo TEXT,
     price_cents INTEGER NOT NULL CHECK (price_cents >= 0),
-    stock INTEGER DEFAULT 0 CHECK (stock >= 0),
+    stock INTEGER DEFAULT 0,
     status TEXT DEFAULT 'ATIVO',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

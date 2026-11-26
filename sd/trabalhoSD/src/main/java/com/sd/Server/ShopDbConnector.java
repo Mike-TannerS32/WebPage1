@@ -89,15 +89,15 @@ public class ShopDbConnector {
     //criar um produto
     public int createProduct(Product p) throws SQLException{
         return jdbcTemplate.queryForObject(
-            "INSERT INTO products (name,category,description, photo, price_cents, stock, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO products (name,category,description, photo, price_cents) VALUES (?, ?, ?, ?, ?) RETURNING id",
             Integer.class, p.getName(), p.getCategory(), p.getDescription(),
-            p.getPhoto(),p.getPrice(),p.getStock(), p.getStatus()
+            p.getPhoto(),p.getPrice_cents()
         );
     }
 
-    public boolean updateProduct(int id, Product p) throws SQLException{
+    public Integer updateProduct(int id, Product p) throws SQLException{
         return jdbcTemplate.update("UPDATE products SET name=?, category=?, description=?, photo=?, price_cents=?, stock=?, status=?",
-        p.getName(), p.getCategory(), p.getDescription(), p.getPhoto(), p.getPrice(), p.getStock(), id) > 0;
+        p.getName(), p.getCategory(), p.getDescription(), p.getPhoto(), p.getPrice_cents(), p.getStock(), id);
     }
 
     public int setProductStatus(int id, String status) throws SQLException{
@@ -105,8 +105,9 @@ public class ShopDbConnector {
     }
 
     //listar todos os produtos
-    public List<Product> getProducts() throws SQLException{
-        return jdbcTemplate.query("SELECT * FROM products", productMapper);
+    public List<Product> getProducts(String category, String name) throws SQLException{
+        return jdbcTemplate.query("SELECT * FROM products WHERE status='ATIVO' AND (category= COALESCE(?, category)) AND (name ILIKE '%' || COALESCE(?,'') || '%')", 
+        productMapper, category, name);
     }
 
     public List<Product> getProductsByStatus(String status) throws SQLException{
