@@ -19,6 +19,7 @@ public class CustomerController {
     
     private final ShopDbConnector shopDbConnector;
 
+    //inicializar o controller com o connector
     public CustomerController (ShopDbConnector shopDbConnector){
         this.shopDbConnector = shopDbConnector;
     }
@@ -33,6 +34,4 @@ public class CustomerController {
     public Customer getCustomer(@PathVariable Integer id) throws SQLException{
         return shopDbConnector.getCustomerById(id);
     }
-
-    
 }
