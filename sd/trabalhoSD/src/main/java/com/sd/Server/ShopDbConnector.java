@@ -95,9 +95,9 @@ public class ShopDbConnector {
         );
     }
 
-    public Integer updateProduct(int id, Product p) throws SQLException{
+    public Boolean updateProduct(int id, Product p) throws SQLException{
         return jdbcTemplate.update("UPDATE products SET name=?, category=?, description=?, photo=?, price_cents=?, stock=?, status=?",
-        p.getName(), p.getCategory(), p.getDescription(), p.getPhoto(), p.getPrice_cents(), p.getStock(), id);
+        p.getName(), p.getCategory(), p.getDescription(), p.getPhoto(), p.getPrice_cents(), p.getStock(), id) > 0;
     }
 
     public int setProductStatus(int id, String status) throws SQLException{

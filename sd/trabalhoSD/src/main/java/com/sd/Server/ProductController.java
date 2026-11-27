@@ -32,7 +32,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
-    // 201 - found, 404 - not found, 500 - bad request
+    // 201 - found, 404 - not found, 400 - bad request
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Integer id) throws SQLException{
         return shopDbConnector.getProductById(id);
@@ -46,9 +46,14 @@ public class ProductController {
 
     // não tenho a certeza se foi a decisão correta
     // deve devolver 204 - updated successfully
-    @PutMapping
-    public Integer updateProduct(@RequestParam Integer id, @RequestBody Product product) throws SQLException{
-        return shopDbConnector.updateProduct(id, product);
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateProduct(@PathVariable int id, @RequestBody Product product) throws SQLException{
+        boolean updated = shopDbConnector.updateProduct(id, product);
+        if(!updated){
+            return ResponseEntity.notFound().build(); // 404 not found   
+        }
+        return ResponseEntity.noContent().build(); // 204 updated
     }
- 
+    
+    
 }
